@@ -14,10 +14,10 @@
                         @endif
 
                         <table>
-                            <th>Nome</th>
-                            <th>Endereço</th>
-                            <th>Número</th>
-                            <th>Ações</th>
+                            <th width="200">Nome</th>
+                            <th width="200">Endereço</th>
+                            <th width="200">Número</th>
+                            <th width="200">Ações</th>
                             <tbody>
                                 @foreach($clientes as $cliente)
                                 <tr>

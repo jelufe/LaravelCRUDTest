@@ -50,8 +50,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Entrar</a></li>
-                            <li><a href="{{ route('register') }}">Cadastrar</a></li>
+
 
                         @else
                             <li class="dropdown">
