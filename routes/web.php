@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', 'ClientesController@index');
+Route::get('/', 'UsuariosController@index');
+Route::post('/Usuario', 'UsuariosController@entrar');
+Route::get('/sair', 'UsuariosController@sair');
+Route::get('Usuario/novo', 'UsuariosController@novo');
+Route::post('Usuario/salvar', 'UsuariosController@salvar');
 
 Route::get('/Clientes', 'ClientesController@index');
 Route::get('/Clientes/novo', 'ClientesController@novo');

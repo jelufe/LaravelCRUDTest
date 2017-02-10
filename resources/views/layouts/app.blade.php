@@ -48,9 +48,12 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
 
+                        @if($_SESSION['id'] != null)
+                            <li><a href="{{ url('/') }}">{{$_SESSION['nome']}}</a></li>
+                            <li><a href="{{ url('/sair') }}">Sair</a></li>
+                        @endif
+                        @if (Auth::guest())
 
                         @else
                             <li class="dropdown">

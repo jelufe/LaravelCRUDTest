@@ -9,42 +9,73 @@ use Redirect;
 class ClientesController extends Controller
 {
     public function index(){
-        $clientes = Cliente::get();
-        return view('clientes.lista', ['clientes' => $clientes]);
+
+        session_start();
+        if($_SESSION['id'] != null){
+            $clientes = Cliente::get();
+            return view('clientes.lista', ['clientes' => $clientes]);
+        } else {
+            return view('loginusuarios');
+        }
     }
 
     public function novo(){
-        return view('clientes.formulario');
+        session_start();
+        if($_SESSION['id'] != null) {
+            return view('clientes.formulario');
+        } else {
+            return view('loginusuarios');
+        }
     }
 
     public function salvar(Request $request){
-        $cliente = new Cliente();
+        session_start();
+        if($_SESSION['id'] != null) {
+            $cliente = new Cliente();
 
-        $cliente = $cliente->create($request->all());
+            $cliente = $cliente->create($request->all());
 
-        \Session::flash('mensagem_sucesso', 'Cliente cadastrado com Sucesso!');
+            \Session::flash('mensagem_sucesso', 'Cliente cadastrado com Sucesso!');
 
-        return Redirect::to('Clientes/novo');
+            return Redirect::to('Clientes/novo');
+        } else {
+            return view('loginusuarios');
+        }
     }
 
     public function editar($id){
-        $cliente = Cliente::findOrFail($id);
-        return view('clientes.formulario', ['cliente' => $cliente]);
+        session_start();
+        if($_SESSION['id'] != null) {
+            $cliente = Cliente::findOrFail($id);
+            return view('clientes.formulario', ['cliente' => $cliente]);
+        } else {
+            return view('loginusuarios');
+        }
     }
 
     public function atualizar($id, Request $request){
-        $cliente = Cliente::findOrFail($id);
-        $cliente->update($request->all());
-        \Session::flash('mensagem_sucesso', 'Cliente atualizado com Sucesso!');
-        return Redirect::to('Clientes/'.$cliente->id.'/editar');
+        session_start();
+        if($_SESSION['id'] != null) {
+            $cliente = Cliente::findOrFail($id);
+            $cliente->update($request->all());
+            \Session::flash('mensagem_sucesso', 'Cliente atualizado com Sucesso!');
+            return Redirect::to('Clientes/' . $cliente->id . '/editar');
+        } else {
+            return view('loginusuarios');
+        }
     }
 
     public function deletar($id){
-        $cliente = Cliente::findOrFail($id);
-        $cliente->delete();
+        session_start();
+        if($_SESSION['id'] != null) {
+            $cliente = Cliente::findOrFail($id);
+            $cliente->delete();
 
-        \Session::flash('mensagem_sucesso', 'Cliente deletado com Sucesso!');
-        return Redirect::to('Clientes');
+            \Session::flash('mensagem_sucesso', 'Cliente deletado com Sucesso!');
+            return Redirect::to('Clientes');
+        } else {
+            return view('loginusuarios');
+        }
     }
 
 }
